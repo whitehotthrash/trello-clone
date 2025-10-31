@@ -1,10 +1,16 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy 
+from flask_marshmallow import Marshmallow
+
 app = Flask(__name__)
+ma = Marshmallow(app)
+
 # set the database URI via SQLAlchemy, 
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://db_dev:123456@localhost:5432/trello_clone_db"
+
 # to avoid the deprecation warning
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 #create the database object
 db = SQLAlchemy(app)
 
@@ -66,4 +72,11 @@ def drop_db():
 @app.route("/")
 def hello():
   return "Hello World!"
+
+@app.route("/cards", methods=["GET"])
+def get_cards():
+    #get all the cards from the database table
+    stmt = db.select(Card)
+    cards = db.session.scalars(stmt)
+    return cards
 
