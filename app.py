@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy 
 from flask_marshmallow import Marshmallow
 import json
+import random
 from datetime import datetime
 
 app = Flask(__name__)
@@ -95,6 +96,7 @@ def hello():
     <li>Current Time: /time</li>
     <li>Educator Info: /educators</li>
     <li>Cards: /cards</li>
+    <li>Coin Flip: /coinflip</li>
     </ul>"""
 
 @app.route("/cards", methods=["GET"])
@@ -139,3 +141,20 @@ def educators():
         ]
     }
     return json.dumps(educator_dict)
+  
+@app.route("/coinflip")
+def coinflip():
+    result = ["heads", "tails"]
+    return jsonify({"result": random.choice(result)})
+  
+# @app.route("/success/<int:score>")
+# def success(): 
+#     return "You passed the exam with a score of " + str(score)
+
+@app.route("/results/<int:score>")
+def results(score):
+  if score >= 50:
+      result = "Success"
+  else:
+      result = "Fail"
+  return result
