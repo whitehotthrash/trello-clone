@@ -222,19 +222,19 @@ def results(score):
 @app.route("/string_route/<string:some_string>")
 def string_route(some_string):
     """A route that accepts a string variable."""
-    pass
+    return f"The string value is {some_string}"
 
 @app.route("/int_route/<int:some_int>")
 def int_route(some_int):
     """A route that accepts an integer variable."""
-    pass
+    return f"The integer value is {some_int}"
 
 @app.route("/float_route/<float:some_float>")
 def float_route(some_float):
     """A route that accepts a float variable."""
-    pass
+    return f"The float value is {some_float}"
 
 @app.route("/path_route/<path:some_path>")
 def path_route(some_path):
-    """A route that accepts a path variable."""
-    pass
+    # A route that takes you to another page.
+    return f"The URL path is {some_path}"
