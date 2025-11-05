@@ -217,6 +217,24 @@ def results(score):
     else:
         result = "Fail"
     return result
+  
+@app.route("/calculate/<int:num1>/<string:operation>/<int:num2>")
+def calculate(num1, operation, num2):
+    if operation == "add":
+        result = num1 + num2
+        return f"The sum of {num1} and {num2} is {result}"
+    elif operation == "subtract":
+        result = num1 - num2
+        return f"The difference of {num1} and {num2} is {result}"
+    elif operation == "multiply":
+        result = num1 * num2
+        return f"The product of {num1} and {num2} is {result}"
+    elif operation == "divide":
+        result = num1 / num2
+        return f"The quotient of {num1} and {num2} is {result}"
+    else:
+        return "Invalid operation"
+  
 
 
 @app.route("/string_route/<string:some_string>")
